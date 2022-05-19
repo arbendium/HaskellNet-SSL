@@ -51,8 +51,6 @@ connectSTARTTLS hostname cfg = do
     failIfNot bs 220 $ parse $ B.unpack greeting
 
     hn <- getHostName
-    bsPut bs $ B.pack ("HELO " ++ hn ++ "\r\n")
-    getResponse bs >>= failIfNot bs 250
     bsPut bs $ B.pack ("EHLO " ++ hn ++ "\r\n")
     getResponse bs >>= failIfNot bs 250
     bsPut bs $ B.pack "STARTTLS\r\n"
